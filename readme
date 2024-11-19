@@ -1,0 +1,10 @@
+Commencez par  : python -m venv env
+puis :  .\env\Scripts\activate (dans un commande prompt)
+puis : pip install pygame
+
+l'environnement virtuelle permet d'avoir une configuration de Python spécifique à un projet.
+Pour sortir de l'environnement virtuelle --> deactivate
+Pour stocker toutes les dépendances installer dans un fichier .txt on fait pip freeze > requirements.txt
+Pour récuperer les dépendances : pip install -r requirements
+
+assets : https://pixabay.com/ & https://itch.io/
