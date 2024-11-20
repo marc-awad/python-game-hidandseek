@@ -1,11 +1,13 @@
 from game import Game
 import pygame
-from constants import SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND_HOME_PAGE, STARTING_BUTTON
+from constants import SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND_HOME_PAGE, STARTING_BUTTON, STARTING_SOUND
 
 def main():
+    pygame.mixer.init()
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-    pygame.display.set_caption("Page d'accueil")
+    start_sound = pygame.mixer.Sound(STARTING_SOUND)
+    pygame.display.set_caption("Home page")
     
 
     # Mettre à jour l'affichage
@@ -34,6 +36,7 @@ def main():
         if home_page_button_rect.collidepoint(mouse_pos):
             home_page_button = pygame.transform.scale(home_page_button,(SCREEN_WIDTH/9, SCREEN_HEIGHT/9))
             if event.type == pygame.MOUSEBUTTONDOWN:
+                start_sound.play()
                 game = Game()
                 game.run()
 

@@ -7,13 +7,13 @@ PLAYER_SPEED = 20
 PLAYER_SIZE = 70
 PLAYER_START_X = (SCREEN_WIDTH / 2) - (PLAYER_SIZE / 2)
 PLAYER_START_Y = SCREEN_HEIGHT - PLAYER_SIZE
-WINNING_CONDITION = 2
+WINNING_CONDITION = 10
 
 # Ennemi
 ENEMY_SPEED = 10
 ENEMY_SIZE = 70
 
-# Assets
+# Assets VISUELLE
 STARTING_BUTTON = "assets/img/start_button.jpg"
 BACKGROUND_IMAGE = "assets/img/background.jpg"
 BACKGROUND_HOME_PAGE = "assets/img/home_page.png"
@@ -23,10 +23,18 @@ ENEMY_IMAGE = "assets/img/enemy.png"
 VICTORY_SCREEN = "assets/img/victory_screen.jpg" 
 SPACE_BUTTON_PRESSED_IMAGE = "assets/img/pressing_start_indication.png"
 FLYING_IMAGE = "assets/img/flying_image.png"
+
+#Assets SONORE
+STARTING_SOUND = "assets/sound/start.wav"
+COLLISION_SOUND ="assets/sound/collision.mp3"
+WINNING_SOUND = "assets/sound/winning.mp3"
+BACKGROUND_SOUND = "assets/sound/background.mp3"
+
 SKY_SCALE_HEIGHT_RATIO = 1.5
 
 # Titre du jeu
 GAME_TITLE = "Game Page"
+
 
 #Couleur
 WHITE = (255, 255, 255)

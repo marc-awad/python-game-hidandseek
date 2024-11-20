@@ -6,7 +6,10 @@ from constants import *
 
 class Game:
     def __init__(self):
+        pygame.mixer.init()
         pygame.init()
+        self.collision_sound = pygame.mixer.Sound(COLLISION_SOUND)
+        self.winning_sound = pygame.mixer.Sound(WINNING_SOUND)
         self.score = 0
         self.font = pygame.font.Font(None, 50)
 
@@ -29,9 +32,13 @@ class Game:
         self.started = True
         self.running = True
 
+    def start_background_sound(self):
+        pygame.mixer.music.load(BACKGROUND_SOUND)  
+        pygame.mixer.music.set_volume(0.5)
+        pygame.mixer.music.play(loops=-1)  
+
     def movements(self):
         keys = pygame.key.get_pressed()
-
         if keys[pygame.K_UP]:
             self.player.move_up()
             self.player.image = self.player.flying_image
@@ -45,6 +52,7 @@ class Game:
             self.player.move_right()
 
     def show_victory_screen(self):
+        pygame.mixer.music.stop()
         self.victory_screen = pygame.image.load(VICTORY_SCREEN)
         self.victory_screen = pygame.transform.scale(self.victory_screen, (SCREEN_WIDTH, SCREEN_HEIGHT))
         self.screen.blit(self.victory_screen, (0, 0))
@@ -53,11 +61,12 @@ class Game:
         self.press_space_button = pygame.transform.scale(self.press_space_button,(SCREEN_WIDTH/3, SCREEN_HEIGHT/7))
         self.screen.blit(self.press_space_button, (500,500))
         pygame.display.flip()
-        print("Ecran de victoire chargé")
+
         
         # Réinitialiser le jeu si l'utilisateur appuie sur ESPACE
         keys = pygame.key.get_pressed()
         if keys[pygame.K_SPACE]:
+            self.start_background_sound()
             self.score = 0
             self.player.rect.x, self.player.rect.y = PLAYER_START_X, PLAYER_START_Y
             self.enemy.random_position()
@@ -69,15 +78,18 @@ class Game:
 
     def check_collision(self):
         if self.player.rect.colliderect(self.enemy.rect):
+            self.collision_sound.play()
             self.enemy.random_position()
             self.score += 1
             # Vérifie la condition de victoire
             if self.score == WINNING_CONDITION:
                 self.started = False
+
         # Met à jour le texte du score
         self.score_text = self.font.render(f"Score : {self.score}", True, WHITE)
 
     def run(self):
+        self.start_background_sound()
         # Garder la fenêtre allumée tant que le jeu est lancé
         while self.running:
             if self.started:
@@ -92,8 +104,10 @@ class Game:
                 self.screen.blit(self.enemy.image, self.enemy.rect)
                 # Position en haut à gauche
                 self.screen.blit(self.score_text, (SCREEN_WIDTH/2, 5))
+                if not self.started:
+                    self.winning_sound.play()
             else:
-                self.show_victory_screen()
+                self.show_victory_screen()                
 
             # Mettre à jour l'écran (chaque frame du jeu)
             pygame.display.flip()
