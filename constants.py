@@ -14,7 +14,9 @@ ENEMY_SPEED = 10
 ENEMY_SIZE = 70
 
 # Assets
+STARTING_BUTTON = "assets/img/start_button.jpg"
 BACKGROUND_IMAGE = "assets/img/background.jpg"
+BACKGROUND_HOME_PAGE = "assets/img/home_page.png"
 SKY_IMAGE = "assets/img/sky.png"
 PLAYER_IMAGE = "assets/img/player.png"
 ENEMY_IMAGE = "assets/img/enemy.png"
@@ -22,7 +24,7 @@ VICTORY_SCREEN = "assets/img/victory_screen.jpg"
 SKY_SCALE_HEIGHT_RATIO = 1.5
 
 # Titre du jeu
-GAME_TITLE = "First Gaming Project"
+GAME_TITLE = "Game Page"
 
 #Couleur
 WHITE = (255, 255, 255)

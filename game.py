@@ -20,13 +20,11 @@ class Game:
 
         # Charger l'image de fond (décor)
         self.background = pygame.image.load(BACKGROUND_IMAGE)
-        self.background = pygame.transform.scale(
-            self.background, (SCREEN_WIDTH, SCREEN_HEIGHT))
+        self.background = pygame.transform.scale(self.background, (SCREEN_WIDTH, SCREEN_HEIGHT))
 
         # Chargement et redimensionnement du ciel par rapport au background
         self.sky = pygame.image.load(SKY_IMAGE)
-        self.sky = pygame.transform.scale(
-            self.sky, (SCREEN_WIDTH, int(SCREEN_HEIGHT/SKY_SCALE_HEIGHT_RATIO)))
+        self.sky = pygame.transform.scale(self.sky, (SCREEN_WIDTH, int(SCREEN_HEIGHT/SKY_SCALE_HEIGHT_RATIO)))
 
         self.started = True
         self.running = True
@@ -47,7 +45,6 @@ class Game:
         self.victory_screen = pygame.image.load(VICTORY_SCREEN)
         self.victory_screen = pygame.transform.scale(
             self.victory_screen, (SCREEN_WIDTH, SCREEN_HEIGHT))
-        self.screen.fill(WHITE)
         self.screen.blit(self.victory_screen, (0, 0))
         pygame.display.flip()
         
@@ -56,7 +53,7 @@ class Game:
         if keys[pygame.K_SPACE]:
             self.score = 0
             self.player.rect.x, self.player.rect.y = PLAYER_START_X, PLAYER_START_Y
-            self.enemy.rect.x = SCREEN_WIDTH
+            self.enemy.random_position()
             self.started = True
 
     def gravite(self):
@@ -71,7 +68,7 @@ class Game:
             if self.score == WINNING_CONDITION:
                 self.started = False
         # Met à jour le texte du score
-        self.score_text = self.font.render(f"Score: {self.score}", True, WHITE)
+        self.score_text = self.font.render(f"Score : {self.score}", True, WHITE)
 
     def run(self):
         # Garder la fenêtre allumée tant que le jeu est lancé
@@ -87,7 +84,7 @@ class Game:
                 self.screen.blit(self.player.image, self.player.rect)
                 self.screen.blit(self.enemy.image, self.enemy.rect)
                 # Position en haut à gauche
-                self.screen.blit(self.score_text, (10, 10))
+                self.screen.blit(self.score_text, (SCREEN_WIDTH/2, 5))
             else:
                 self.show_victory_screen()
 
