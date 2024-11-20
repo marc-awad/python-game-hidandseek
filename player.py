@@ -1,14 +1,16 @@
 # C'est un sprite du jeu (tout ce qui n'est pas statique)
 import pygame
-from constants import PLAYER_SPEED, PLAYER_SIZE, PLAYER_IMAGE, PLAYER_START_X, PLAYER_START_Y
+from constants import PLAYER_SPEED, PLAYER_SIZE, PLAYER_IMAGE, PLAYER_START_X, PLAYER_START_Y, FLYING_IMAGE
 
 
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
-        self.image = pygame.image.load(PLAYER_IMAGE)
-        self.image = pygame.transform.scale(
-            self.image, (PLAYER_SIZE, PLAYER_SIZE))
+        self.normal_image = pygame.image.load(PLAYER_IMAGE)
+        self.normal_image = pygame.transform.scale(self.normal_image, (PLAYER_SIZE, PLAYER_SIZE))
+        self.flying_image = pygame.image.load(FLYING_IMAGE)
+        self.flying_image = pygame.transform.scale(self.flying_image, (PLAYER_SIZE, PLAYER_SIZE))
+        self.image = self.normal_image
         self.rect = self.image.get_rect()
         self.rect.x = PLAYER_START_X
         self.rect.y = PLAYER_START_Y

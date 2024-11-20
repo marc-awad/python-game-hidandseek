@@ -1,7 +1,7 @@
 import pygame
 from player import Player
 from enemy import Enemy
-from constants import SCREEN_WIDTH, SCREEN_HEIGHT, BACKGROUND_IMAGE, SKY_IMAGE, SKY_SCALE_HEIGHT_RATIO, GAME_TITLE, PLAYER_SIZE, WHITE, VICTORY_SCREEN, WINNING_CONDITION, PLAYER_START_X, PLAYER_START_Y
+from constants import *
 
 
 class Game:
@@ -34,6 +34,9 @@ class Game:
 
         if keys[pygame.K_UP]:
             self.player.move_up()
+            self.player.image = self.player.flying_image
+        else:
+            self.player.image = self.player.normal_image
         if keys[pygame.K_DOWN]:
             self.player.move_down()
         if keys[pygame.K_LEFT]:
@@ -43,10 +46,14 @@ class Game:
 
     def show_victory_screen(self):
         self.victory_screen = pygame.image.load(VICTORY_SCREEN)
-        self.victory_screen = pygame.transform.scale(
-            self.victory_screen, (SCREEN_WIDTH, SCREEN_HEIGHT))
+        self.victory_screen = pygame.transform.scale(self.victory_screen, (SCREEN_WIDTH, SCREEN_HEIGHT))
         self.screen.blit(self.victory_screen, (0, 0))
+
+        self.press_space_button = pygame.image.load(SPACE_BUTTON_PRESSED_IMAGE)
+        self.press_space_button = pygame.transform.scale(self.press_space_button,(SCREEN_WIDTH/3, SCREEN_HEIGHT/7))
+        self.screen.blit(self.press_space_button, (500,500))
         pygame.display.flip()
+        print("Ecran de victoire chargé")
         
         # Réinitialiser le jeu si l'utilisateur appuie sur ESPACE
         keys = pygame.key.get_pressed()
